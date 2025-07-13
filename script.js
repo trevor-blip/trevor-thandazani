@@ -1,4 +1,4 @@
-// Enhanced Modern Romantic Love Story - JavaScript
+// Enhanced Modern Romantic Love Story - JavaScript (Performance Optimized)
 
 document.addEventListener("DOMContentLoaded", function () {
   // Set romantic background music volume
@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (bgMusic) {
     bgMusic.volume = 0.25; // Gentle romantic volume
   }
+
   // Play buttons for music (required for autoplay restrictions)
   const playBtns = document.querySelectorAll(".play-music-btn");
   if (playBtns.length && bgMusic) {
@@ -16,6 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
+
   // Initialize all features
   initFloatingElements();
   initScrollAnimations();
@@ -24,13 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
   initTypingEffect();
 });
 
-// Enhanced Floating Elements Animation (Hearts + Images)
+// Enhanced Floating Elements Animation (Hearts + Images) - OPTIMIZED
 function initFloatingElements() {
   const hearts = document.querySelector(".hearts");
   const heartEmojis = ["💖", "💕", "💗", "💓", "💝", "💘", "💞", "💟"];
 
-  // Add floating hearts
-  for (let i = 0; i < 25; i++) {
+  // REDUCED: Add fewer floating hearts for better performance
+  for (let i = 0; i < 12; i++) {
+    // Reduced from 25 to 12
     const heart = document.createElement("div");
     heart.className = "heart";
     heart.style.left = Math.random() * 100 + "vw";
@@ -42,7 +45,7 @@ function initFloatingElements() {
     hearts.appendChild(heart);
   }
 
-  // Add floating images with different shapes
+  // Add floating images with different shapes - OPTIMIZED
   const floatingImages = [
     "Love story/20250126_174400.jpg",
     "Love story/20250126_174357.jpg",
@@ -99,10 +102,14 @@ function initFloatingElements() {
     "22px", // Generously rounded
   ];
 
-  for (let i = 0; i < floatingImages.length; i++) {
+  // REDUCED: Show fewer images at once for better performance
+  const maxImages = 15; // Reduced from all images to 15
+  const selectedImages = floatingImages.slice(0, maxImages);
+
+  for (let i = 0; i < selectedImages.length; i++) {
     const image = document.createElement("img");
     image.className = "floating-image";
-    image.src = floatingImages[i];
+    image.src = selectedImages[i];
     image.alt = "Floating memory";
     image.style.left = Math.random() * 100 + "vw";
     image.style.animationDuration = Math.random() * 10 + 8 + "s";
@@ -123,7 +130,7 @@ function initFloatingElements() {
   }
 }
 
-// Image burst effect when clicked
+// Image burst effect when clicked - OPTIMIZED
 function createImageBurst(element) {
   const rect = element.getBoundingClientRect();
   const burstContainer = document.createElement("div");
@@ -135,8 +142,9 @@ function createImageBurst(element) {
 
   document.body.appendChild(burstContainer);
 
-  // Create sparkle effect
-  for (let i = 0; i < 12; i++) {
+  // REDUCED: Fewer sparkles for better performance
+  for (let i = 0; i < 8; i++) {
+    // Reduced from 12 to 8
     const sparkle = document.createElement("div");
     sparkle.textContent = "✨";
     sparkle.style.position = "absolute";
@@ -145,7 +153,7 @@ function createImageBurst(element) {
     sparkle.style.animation = `sparkleBurst 1.5s ease-out forwards`;
     sparkle.style.animationDelay = `${i * 0.1}s`;
 
-    const angle = i * 30 * (Math.PI / 180);
+    const angle = i * 45 * (Math.PI / 180); // Changed from 30 to 45 degrees
     const distance = 80;
     const x = Math.cos(angle) * distance;
     const y = Math.sin(angle) * distance;
@@ -180,11 +188,13 @@ function createImageBurst(element) {
   }
 
   setTimeout(() => {
-    document.body.removeChild(burstContainer);
+    if (burstContainer.parentNode) {
+      document.body.removeChild(burstContainer);
+    }
   }, 2000);
 }
 
-// Scroll Animations
+// Scroll Animations - OPTIMIZED
 function initScrollAnimations() {
   const observerOptions = {
     threshold: 0.1,
@@ -206,10 +216,13 @@ function initScrollAnimations() {
   });
 }
 
-// Interactive Elements
+// Interactive Elements - OPTIMIZED
 function initInteractiveElements() {
-  // Gallery image click effects
+  // Cache DOM queries
   const galleryImages = document.querySelectorAll(".gallery img");
+  const timelineItems = document.querySelectorAll(".timeline-item");
+
+  // Gallery image click effects
   galleryImages.forEach((img) => {
     img.addEventListener("click", function () {
       createHeartBurst(this);
@@ -226,7 +239,6 @@ function initInteractiveElements() {
   });
 
   // Timeline item interactions
-  const timelineItems = document.querySelectorAll(".timeline-item");
   timelineItems.forEach((item) => {
     item.addEventListener("mouseenter", function () {
       this.style.transform = "translateX(10px) scale(1.02)";
@@ -238,17 +250,34 @@ function initInteractiveElements() {
   });
 }
 
-// Parallax Effects
+// Parallax Effects - MAJOR OPTIMIZATION
 function initParallaxEffects() {
-  window.addEventListener("scroll", () => {
+  let ticking = false;
+  const parallaxElements = document.querySelectorAll("section");
+
+  // Throttled scroll handler using requestAnimationFrame
+  function updateParallax() {
     const scrolled = window.pageYOffset;
-    const parallaxElements = document.querySelectorAll("section");
 
     parallaxElements.forEach((element, index) => {
       const speed = 0.5 + index * 0.1;
       element.style.transform = `translateY(${scrolled * speed * 0.1}px)`;
     });
-  });
+
+    ticking = false;
+  }
+
+  // Throttled scroll event listener
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  ); // Added passive for better performance
 }
 
 // Typing Effect for Header
@@ -270,7 +299,7 @@ function initTypingEffect() {
   setTimeout(typeWriter, 1000);
 }
 
-// Heart Burst Effect
+// Heart Burst Effect - OPTIMIZED
 function createHeartBurst(element) {
   const rect = element.getBoundingClientRect();
   const burstContainer = document.createElement("div");
@@ -282,7 +311,9 @@ function createHeartBurst(element) {
 
   document.body.appendChild(burstContainer);
 
-  for (let i = 0; i < 8; i++) {
+  // REDUCED: Fewer hearts for better performance
+  for (let i = 0; i < 6; i++) {
+    // Reduced from 8 to 6
     const heart = document.createElement("div");
     heart.textContent = "💖";
     heart.style.position = "absolute";
@@ -291,7 +322,7 @@ function createHeartBurst(element) {
     heart.style.animation = `heartBurst 1s ease-out forwards`;
     heart.style.animationDelay = `${i * 0.1}s`;
 
-    const angle = i * 45 * (Math.PI / 180);
+    const angle = i * 60 * (Math.PI / 180); // Changed from 45 to 60 degrees
     const distance = 100;
     const x = Math.cos(angle) * distance;
     const y = Math.sin(angle) * distance;
@@ -326,7 +357,9 @@ function createHeartBurst(element) {
   }
 
   setTimeout(() => {
-    document.body.removeChild(burstContainer);
+    if (burstContainer.parentNode) {
+      document.body.removeChild(burstContainer);
+    }
   }, 2000);
 }
 
