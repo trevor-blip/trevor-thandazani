@@ -1,0 +1,883 @@
+/* Modern Romantic Love Story - Enhanced Design */
+
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;700&display=swap");
+
+/* CSS Variables for easy customization */
+:root {
+  --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --text-primary: #ffffff;
+  --text-secondary: #f8f9fa;
+  --shadow-light: 0 8px 32px rgba(31, 38, 135, 0.37);
+  --shadow-heavy: 0 15px 35px rgba(0, 0, 0, 0.3);
+  --border-radius: 20px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: var(--primary-gradient);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 0; /* Remove previous padding-bottom */
+}
+
+main {
+  flex: 1 0 auto; /* Main content grows to fill space */
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+/* Animated Background */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 20% 80%,
+      rgba(120, 119, 198, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 119, 198, 0.3) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 40% 40%,
+      rgba(120, 219, 255, 0.3) 0%,
+      transparent 50%
+    );
+  animation: backgroundShift 20s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes backgroundShift {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1) rotate(1deg);
+  }
+}
+
+/* Header Styles */
+header {
+  text-align: center;
+  padding: 120px 20px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  z-index: -1;
+  animation: headerGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes headerGlow {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+  }
+  100% {
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
+  }
+}
+
+header h1 {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(3rem, 8vw, 5rem);
+  margin-bottom: 20px;
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: titleFloat 4s ease-in-out infinite;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes titleFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+header p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  opacity: 0.9;
+  animation: fadeInUp 1s ease-out 0.5s both;
+}
+
+/* Section Styles */
+section {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 40px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+section:hover::before {
+  left: 100%;
+}
+
+section:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-heavy);
+}
+
+section h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  font-family: "Dancing Script", cursive;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+}
+
+section h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--secondary-gradient);
+  border-radius: 2px;
+  animation: lineExpand 2s ease-out;
+}
+
+@keyframes lineExpand {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 60px;
+  }
+}
+
+/* Gallery Styles */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.gallery img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: var(--shadow-light);
+  transition: var(--transition);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery img::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.gallery img:hover::before {
+  opacity: 1;
+}
+
+/* Timeline Styles */
+.timeline {
+  border-left: 4px solid;
+  border-image: var(--secondary-gradient) 1;
+  padding-left: 30px;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--secondary-gradient);
+  animation: timelineGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes timelineGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(245, 87, 108, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(245, 87, 108, 0.8);
+  }
+}
+
+.timeline-item {
+  margin-bottom: 30px;
+  position: relative;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  transition: var(--transition);
+  animation: slideInLeft 0.8s ease-out both;
+}
+
+.timeline-item:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.timeline-item:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.timeline-item:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.timeline-item::before {
+  content: "💕";
+  position: absolute;
+  left: -45px;
+  top: 20px;
+  font-size: 1.5em;
+  animation: heartBeat 2s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.timeline-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(10px);
+}
+
+/* Quote Styles */
+blockquote {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.4rem;
+  font-style: italic;
+  text-align: center;
+  margin: 30px 0;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border-left: 5px solid;
+  border-image: var(--accent-gradient) 1;
+  position: relative;
+  animation: quoteFloat 3s ease-in-out infinite;
+}
+
+@keyframes quoteFloat {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+blockquote::before {
+  content: '"';
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  top: -10px;
+  left: 20px;
+}
+
+/* Footer Styles */
+footer {
+  position: relative; /* Make sure it's not fixed or absolute */
+  z-index: 1;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid var(--glass-border);
+  margin-top: 40px;
+  padding: 40px 20px 30px 20px; /* Add extra bottom padding if needed */
+  min-height: 120px; /* Adjust as needed for your content */
+  box-sizing: border-box;
+}
+
+footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--secondary-gradient);
+  animation: footerGlow 3s ease-in-out infinite;
+}
+
+@keyframes footerGlow {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Enhanced Floating Elements Animation */
+.hearts {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.heart {
+  position: absolute;
+  color: #fff;
+  animation: floatEnhanced 8s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+  pointer-events: none;
+}
+
+.floating-image {
+  position: absolute;
+  animation: floatEnhanced 10s linear infinite;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.3));
+  pointer-events: auto;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.85;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.floating-image:hover {
+  transform: scale(1.3) rotate(8deg);
+  opacity: 1;
+  filter: drop-shadow(0 0 25px rgba(255, 255, 255, 0.8));
+  z-index: 10;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+@keyframes floatEnhanced {
+  0% {
+    transform: translateY(100vh) scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(90vh) scale(1) rotate(0deg);
+  }
+  90% {
+    opacity: 1;
+    transform: translateY(10vh) scale(1) rotate(360deg);
+  }
+  100% {
+    transform: translateY(-10vh) scale(0) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Chat Quotes Section Styles */
+#chat-quotes {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 182, 193, 0.15) 0%,
+    rgba(255, 105, 180, 0.15) 100%
+  );
+  border: 2px solid rgba(255, 182, 193, 0.3);
+}
+
+.chat-quotes-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.chat-quote-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 25px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-quote-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff69b4, #ff1493, #ff69b4);
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.chat-quote-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(255, 105, 180, 0.3);
+  border-color: rgba(255, 105, 180, 0.5);
+}
+
+.chat-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+}
+
+.chat-date {
+  font-size: 0.9rem;
+  color: #ffb6c1;
+  font-weight: 500;
+}
+
+.chat-time {
+  font-size: 0.8rem;
+  color: #ffc0cb;
+  background: rgba(255, 182, 193, 0.2);
+  padding: 4px 8px;
+  border-radius: 12px;
+}
+
+.chat-messages-container {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 15px;
+  padding-right: 5px;
+}
+
+.chat-messages-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-messages-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.chat-messages-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 105, 180, 0.5);
+  border-radius: 3px;
+}
+
+.chat-messages-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 105, 180, 0.7);
+}
+
+.chat-message {
+  margin-bottom: 12px;
+  padding: 8px 12px;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+}
+
+.chat-message:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(5px);
+}
+
+.sender {
+  font-weight: 600;
+  color: #ff69b4;
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
+.message {
+  color: var(--text-secondary);
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.quote-caption {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-style: italic;
+  color: #ffb6c1;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+    padding: 80px 20px 60px;
+  }
+
+  section {
+    margin: 40px 20px;
+    padding: 30px 20px;
+  }
+
+  .gallery {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+  }
+
+  .timeline {
+    padding-left: 20px;
+  }
+
+  .timeline-item::before {
+    left: -35px;
+  }
+}
+
+/* Responsive design for chat quotes */
+@media (max-width: 768px) {
+  .chat-quotes-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .chat-quote-card {
+    padding: 20px;
+  }
+
+  .chat-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+}
+
+/* Scroll Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Love Stats */
+.love-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 30px;
+  margin-top: 40px;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  border: 1px solid var(--glass-border);
+}
+
+.stat-item {
+  text-align: center;
+  padding: 20px;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.stat-item:hover::before {
+  left: 100%;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  display: block;
+  font-size: 3rem;
+  font-weight: 700;
+  font-family: "Dancing Script", cursive;
+  background: var(--secondary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 10px;
+  animation: numberPulse 2s ease-in-out infinite;
+}
+
+@keyframes numberPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.stat-label {
+  font-size: 1rem;
+  font-weight: 300;
+  opacity: 0.9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Love Quote */
+.love-quote {
+  margin-top: 40px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  border-left: 5px solid;
+  border-image: var(--accent-gradient) 1;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.love-quote::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  left: 30px;
+  font-size: 6rem;
+  color: rgba(255, 255, 255, 0.1);
+  font-family: "Great Vibes", cursive;
+}
+
+.love-quote p {
+  font-family: "Dancing Script", cursive;
+  font-size: 1.6rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.quote-author {
+  font-size: 1rem;
+  font-style: italic;
+  opacity: 0.8;
+  font-weight: 300;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-gradient);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-gradient);
+}
+
+.bible-verses-footer {
+  margin-bottom: 10px;
+}
+
+main > section:last-of-type,
+.main-content > section:last-of-type {
+  margin-bottom: 60px; /* Add space above the footer */
+}
+
+footer {
+  border-top: 2px solid #fff;
+  box-shadow: 0 -4px 32px 0 rgba(31, 38, 135, 0.1);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.love-quotes-card {
+  max-width: 700px;
+  margin: 32px auto 0 auto;
+  padding: 48px 24px 48px 24px;
+  background: rgba(30, 20, 10, 0.92);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.28), 0 0 16px 2px #ffd70044;
+  backdrop-filter: blur(10px);
+  border: 2.5px solid #ffd700;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  z-index: 1000;
+  position: relative;
+  overflow: visible;
+}
+
+.love-quotes-card .bible-verse-quote {
+  margin: 0;
+  padding: 18px 12px 12px 12px;
+  background: transparent;
+  border-radius: 16px;
+  color: #fffbe8;
+  font-size: 1.45rem;
+  font-family: "Dancing Script", cursive;
+  font-style: italic;
+  text-align: center;
+  text-shadow: 0 2px 12px #000, 0 0 2px #fff;
+  border-left: 4px solid #ffd700;
+  border-image: none;
+  font-weight: bold;
+  z-index: 1000;
+  position: relative;
+  overflow: visible;
+}
+
+.love-quotes-card .bible-verse-quote .verse-ref {
+  display: block;
+  margin-top: 8px;
+  font-size: 1.1rem;
+  color: #ffe082;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  text-shadow: 0 1px 6px #000;
+  font-weight: normal;
+}
+
+header,
+main {
+  overflow: visible !important;
+}
